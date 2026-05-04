@@ -33,7 +33,9 @@ if (['csp-balanced', 'mode-insecure', 'mode-sri-active'].includes(config.mode)) 
 
 // SRI хеші
 const REACT_HASH_V100 = 'F/DvSjYq7+1mbLZxoEf31eDe/ceMKV7ZWx8oAi3nJDs=';
-const REACT_HASH_V101 = 'PASTE_V101_HASH_HERE';
+const REACT_HASH_V101 = 'ZUbuC7W+uSiutmjIyPPY/QRd+CnexOXX8ClnzumKbEk=';
+
+const hash = REACT_HASH_V101;
 
 function buildHTML(useSRI, hash) {
   const reactTag = useSRI
@@ -88,7 +90,7 @@ function buildHTML(useSRI, hash) {
 
 app.get('/', (req, res) => {
   const useSRI = config.mode === 'mode-sri-active';
-  const hash = REACT_HASH_V100;
+  const hash = REACT_HASH_V101;
   res.send(buildHTML(useSRI, hash));
 });
 
