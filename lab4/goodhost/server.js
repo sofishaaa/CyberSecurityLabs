@@ -26,7 +26,7 @@ if (['csp-balanced', 'mode-insecure', 'mode-sri-active',
   app.use((req, res, next) => {
     res.setHeader(
       'Content-Security-Policy',
-      "default-src 'self'; img-src *; style-src *; script-src 'self' http://localhost:4000 http://localhost:8001"
+      "default-src 'self'; img-src *; style-src *; connect-src *; script-src 'self' http://localhost:4000 http://localhost:8001 http://localhost:8002"
     );
     next();
   });
