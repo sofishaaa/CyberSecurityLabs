@@ -5,27 +5,39 @@ const app = express();
 
 const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 console.log(`[System] Starting ${config.appName} v${config.version}...`);
+console.log(`[System] Mode: ${config.mode}`);
 
 if (config.mode === 'mode1') {
   app.use(cors());
   console.log('[System] CORS enabled: all origins (mode1)');
 }
 
+if (config.mode === 'csp-strict') {
+  app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', "default-src 'self'");
+    next();
+  });
+  console.log('[System] CSP: STRICT');
+}
+
+if (config.mode === 'csp-balanced') {
+  app.use((req, res, next) => {
+    res.setHeader(
+      'Content-Security-Policy',
+      "default-src 'self'; img-src *; style-src *; script-src 'self' http://localhost:4000 http://localhost:8001"
+    );
+    next();
+  });
+  console.log('[System] CSP: BALANCED');
+}
+
 app.use(express.static('.'));
 
 const emails = [
-  {
-    id: 1,
-    sender: "alice@example.com",
-    subject: "Meeting Tomorrow",
-    body: "Hi John, don't forget our 10am meeting tomorrow!"
-  },
-  {
-    id: 2,
-    sender: "bob@example.com",
-    subject: "Project Update",
-    body: "All milestones completed for this sprint."
-  }
+  { id: 1, sender: "alice@example.com", subject: "Meeting Tomorrow",
+    body: "Hi John, don't forget our 10am meeting tomorrow!" },
+  { id: 2, sender: "bob@example.com", subject: "Project Update",
+    body: "All milestones completed for this sprint." }
 ];
 
 app.get('/api/emails', (req, res) => res.json(emails));
