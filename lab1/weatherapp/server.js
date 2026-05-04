@@ -26,3 +26,5 @@ app.get('/weather.js', (req, res) => {
 app.listen(8002, () => {
   console.log('WeatherApp running on http://localhost:8002');
 });
+
+//Lab1Task7 --> HACKED: I can see your cookies: SessionID=123456 and User: John Smith
