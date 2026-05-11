@@ -1,8 +1,5 @@
 # Cyber Security Labs — Browser Security
 
-**Student:** Sofia Hunkalo  
-**Course:** Основи кібербезпеки в розробці ПЗ  
-
 A series of 5 hands-on labs exploring browser security mechanisms using a simulated WebMail application built with Node.js/Express.
 
 ## Architecture
